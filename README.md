@@ -1,1 +1,1 @@
-# ROCK-PAPER-SCISSORS-Game
+This is my first game project on javascript.
