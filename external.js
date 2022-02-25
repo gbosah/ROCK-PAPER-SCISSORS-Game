@@ -1,61 +1,101 @@
-let playerScore = 0;
-let computerScore = 0;
-// computer generating random string.
+let playerScores = 0;
+let compScore = 0;
+const buttons = document.querySelectorAll(".btn");
+
+const alertint = document.querySelector("#output")
+alertint.textContent = "Let Begins"
+
+const playerInt = document.querySelector('#playerscore');
+playerInt.textContent = `Playerscore: ${playerScores}`;
+
+const computerInt = document.querySelector('#computerscore');
+computerInt.textContent = `Computerscore: ${compScore}`;
+
 function computer() {
     const choice = ['rock', 'scissors', 'paper'];
     const randomChoice = Math.floor(Math.random() * choice.length);
     return choice[randomChoice];
 }
+console.log(computer())
 
-// creating round play
-function playerRound () {
-    let computerSelection = computer();
-    let playerSelection = prompt('what your choice?', '' .toLowerCase());
-    
+buttons.forEach((button => {
 
-    if (playerSelection === 'rock' && computerSelection === 'paper') {
-        computerScore += 1;
-        alert('you lose! paper beats rock');
+    button.addEventListener('click', () => {
+
+        playerChioce = button.id;
+        
+        if (playerChioce === "rock") {
+            playerChioce = "rock";
+        
+        } else if (playerChioce === "paper") {
+            playerChioce = "paper"
+        
+        }else if (playerChioce === "scissors") {
+            playerChioce = "scissors";
+        }
+
+        gameScore()
+     });
+
+}));
+
+function playRounds () {
+     let computerSelection = computer();
+     let playerSelection = playerChioce;
+
+     if (playerSelection === 'rock' && computerSelection === 'paper') {
+        compScore++;
+        alertint.textContent = `You lose ${computerSelection} beats ${playerSelection}`;
+        
 
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        computerScore += 1;
-        alert('you lose! scissors beats paper');
+        compScore++
+        alertint.textContent = `You lose ${computerSelection} beats ${playerSelection}`;
 
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        computerScore += 1;
-        alert('you lose! rock beats scissors');
+        compScore++
+        alertint.textContent = `You lose ${computerSelection} beats ${playerSelection}`;
        
-
         
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        playerScore += 1;
-        alert('you win! rock beats scissors');
+        playerScores++
+        alertint.textContent = `You win ${playerSelection} beats ${computerSelection}`;
         
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        playerScore += 1;
-        alert('you win! paper beats rock');
+        playerScores++
+        alertint.textContent = `You win ${playerSelection} beats ${computerSelection}`;
         
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        playerScore += 1;
-        alert('you win! scissors beats paper');
+        playerScores++
+        alertint.textContent = `You win ${playerSelection} beats ${computerSelection}`;
         
+    } else if (playerSelection === computerSelection) {
+        alertint.textContent =`Try again is a tie you choose ${playerSelection} computer choose ${computerSelection}`
     }
-    
-    if (playerScore >= 3) {
-        alert('you win the game! kudos');
-    } else if (computerScore >= 3) {
-        alert('computer win the game!');
-    }
-    
-    
 
-} 
-
-
-function game() {
-    for (let i = 1; playerScore < 3 && computerScore < 3; i++) {
-       playerRound(); 
-    }
-   
+    
 }
-game();
+
+function gameScore () {
+    alertint.textContent = "";
+    playRounds();
+    playerInt.textContent = `Playerscore: ${playerScores}`;
+    computerInt.textContent = `Computerscore: ${compScore}`;
+
+    if (playerScores === 5) {
+        alertint.textContent = "You won the game Enjoy!!!"
+        playerScores = 0;
+        compScore = 0;
+        playerInt.textContent = `Playerscore: ${playerScores}`;
+        computerInt.textContent = `Computerscore: ${compScore}`;
+        
+    } else if (compScore === 5) {
+        alertint.textContent = "You lose the game!!!"
+        playerScores = 0;
+        compScore = 0;
+        playerInt.textContent = `Playerscore: ${playerScores}`;
+        computerInt.textContent = `Computerscore: ${compScore}`;
+
+    }
+
+}
