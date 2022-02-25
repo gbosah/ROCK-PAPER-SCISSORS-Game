@@ -90,7 +90,7 @@ function gameScore () {
         computerInt.textContent = `Computerscore: ${compScore}`;
         
     } else if (compScore === 5) {
-        alertint.textContent = "You lose the game!!!"
+        alertint.textContent = "You lost the game!!!"
         playerScores = 0;
         compScore = 0;
         playerInt.textContent = `Playerscore: ${playerScores}`;
